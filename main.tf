@@ -44,7 +44,7 @@ resource "azurerm_linux_virtual_machine" "private" {
   }
 
   network_interface_ids = [
-    azurerm_network_interface.vault[count.index].id,
+    azurerm_network_interface.private[count.index].id,
   ]
 
   dynamic "identity" {
