@@ -27,7 +27,7 @@ resource "azurerm_linux_virtual_machine" "private" {
   location            = var.location
   size                = var.size
   admin_username      = var.admin_username
-  custom_data = var.cloud_init_script == "" ? null : base64encode(var.cloud_init_script)
+  custom_data         = var.cloud_init_script == "" ? null : base64encode(var.cloud_init_script)
 
   admin_ssh_key {
     username   = var.admin_username
@@ -46,10 +46,10 @@ resource "azurerm_linux_virtual_machine" "private" {
   ]
 
   dynamic "identity" {
-      for_each = var.has_managed_identity ? { managed_identity = "yes" } : {}
-      content {
-        type = "SystemAssigned"
-      }
+    for_each = var.has_managed_identity ? { managed_identity = "yes" } : {}
+    content {
+      type = "SystemAssigned"
+    }
   }
 
   tags = var.tags
