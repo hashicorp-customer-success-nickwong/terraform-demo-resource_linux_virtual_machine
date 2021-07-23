@@ -33,7 +33,7 @@ resource "azurerm_linux_virtual_machine" "private" {
 
   admin_ssh_key {
     username   = var.admin_username
-    public_key = var.ssh_Public_key
+    public_key = var.ssh_public_key
   }
 
   source_image_id = data.azurerm_shared_image_version.private.id
