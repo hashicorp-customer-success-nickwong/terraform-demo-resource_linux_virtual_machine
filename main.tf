@@ -7,7 +7,7 @@ data "azurerm_shared_image_version" "private" {
 
 resource "azurerm_network_interface" "private" {
   name                = "${var.name_prefix}nic-${count.index}"
-  count               = var.count
+  count               = var.machine_count
   location            = var.location
   resource_group_name = var.resource_group_name
 
@@ -23,7 +23,7 @@ resource "azurerm_network_interface" "private" {
 }
 
 resource "azurerm_linux_virtual_machine" "private" {
-  count               = var.count
+  count               = var.machine_count
   name                = "${var.name_prefix}${count.index}"
   resource_group_name = var.resource_group_name
   location            = var.location
