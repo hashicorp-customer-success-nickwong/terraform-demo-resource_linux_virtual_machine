@@ -1,11 +1,5 @@
-variable "machine_count" {
-    type = number
-    default = 1
-}
-
-variable "name_prefix" {
+variable "name" {
   type = string
-  default = "vm-"
 }
 
 variable "resource_group_name" {
@@ -56,8 +50,8 @@ variable "subnet_id" {
     type = string
 }
 
-variable "static_ip_addresses" {
-  type = list(string)
+variable "static_ip_address" {
+  type = string
 }
 
 variable "has_managed_identity" {

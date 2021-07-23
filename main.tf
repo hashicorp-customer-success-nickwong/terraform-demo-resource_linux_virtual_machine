@@ -6,8 +6,7 @@ data "azurerm_shared_image_version" "private" {
 }
 
 resource "azurerm_network_interface" "private" {
-  name                = "${var.name_prefix}nic-${count.index}"
-  count               = var.machine_count
+  name                = "${var.name}-nic"
   location            = var.location
   resource_group_name = var.resource_group_name
 
@@ -16,15 +15,14 @@ resource "azurerm_network_interface" "private" {
     subnet_id                     = var.subnet_id
     private_ip_address_allocation = "Static"
     primary                       = true
-    private_ip_address            = var.static_ip_addresses[count.index]
+    private_ip_address            = var.static_ip_address
   }
 
   tags = var.tags
 }
 
 resource "azurerm_linux_virtual_machine" "private" {
-  count               = var.machine_count
-  name                = "${var.name_prefix}${count.index}"
+  name                = var.name
   resource_group_name = var.resource_group_name
   location            = var.location
   size                = var.size
@@ -44,7 +42,7 @@ resource "azurerm_linux_virtual_machine" "private" {
   }
 
   network_interface_ids = [
-    azurerm_network_interface.private[count.index].id,
+    azurerm_network_interface.private.id,
   ]
 
   dynamic "identity" {
