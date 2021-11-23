@@ -37,6 +37,16 @@ resource "azurerm_linux_virtual_machine" "private" {
 
   source_image_id = var.source_image_name == null ? null : data.azurerm_shared_image_version.private[0].id
 
+  dynamic "source_image_reference" {
+   foreach = var.source_image_publisher == null ? {} : { image_count = 1 }
+   content {
+      publisher = var.source_image_publisher
+      offer     = var.source_image_offer
+      sku       = var.source_image_sku
+      version   = var.source_image_version
+   }
+  }
+  
   os_disk {
     storage_account_type = "Standard_LRS"
     caching              = "ReadWrite"
