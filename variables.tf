@@ -34,16 +34,34 @@ variable "source_image_version" {
   default = "latest"
 }
 
+variable "source_image_offer" {
+  type = string
+  default = null
+}
+
+variable "source_image_publisher" {
+  type = string
+  default = null
+}
+
+variable "source_image_sku" {
+  type = string
+  default = null
+}
+
 variable "source_image_name" {
   type = string
+  default = null
 }
 
 variable "source_image_gallery_name" {
   type = string
+  default = null
 }
 
 variable "source_image_gallery_resource_group_name" {
   type = string
+  default = null
 }
 
 variable "subnet_id" {
