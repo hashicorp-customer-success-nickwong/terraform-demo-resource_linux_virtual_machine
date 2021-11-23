@@ -1,4 +1,5 @@
 data "azurerm_shared_image_version" "private" {
+  count               = var.source_image_name == null ? 0 : 1
   name                = var.source_image_version
   image_name          = var.source_image_name
   gallery_name        = var.source_image_gallery_name
@@ -34,7 +35,7 @@ resource "azurerm_linux_virtual_machine" "private" {
     public_key = var.ssh_public_key
   }
 
-  source_image_id = data.azurerm_shared_image_version.private.id
+  source_image_id = var.source_image_name == null ? null : data.azurerm_shared_image_version.private[0].id
 
   os_disk {
     storage_account_type = "Standard_LRS"
