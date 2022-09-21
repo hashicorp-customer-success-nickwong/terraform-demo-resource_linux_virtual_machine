@@ -1,1 +1,1 @@
-# terraform-jaredholgate-resource_linux_virtual_machine 
+# terraform-resource_linux_virtual_machine 
